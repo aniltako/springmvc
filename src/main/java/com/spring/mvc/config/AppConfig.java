@@ -17,4 +17,10 @@ public class AppConfig {
 		logger.info("Adding method");
 	}
 	
+	public void SecondMethod(){
+		logger.info("Adding method 2");
+	}
+	
+	
+	
 }
