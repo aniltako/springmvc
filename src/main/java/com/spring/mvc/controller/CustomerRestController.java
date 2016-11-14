@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.mvc.api.UserManager;
 import com.spring.mvc.dao.CustomerDAO;
 import com.spring.mvc.model.Customer;
+import com.spring.mvc.model.User;
 
 
 @RestController
@@ -24,7 +26,9 @@ public class CustomerRestController {
 	
 	@Autowired
 	private CustomerDAO customerDAO;
-
+	
+	
+	
 	
 	@GetMapping("/customers")
 	public List getCustomers() {

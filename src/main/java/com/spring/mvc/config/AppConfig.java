@@ -8,11 +8,17 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
+//@WebAppConfiguration
+//@EnableTransactionManagement
+//@Import({MysqlDbConfig.class})
+//@EnableJpaRepositories(basePackages="com.spring.mvc.dao")
 @Configuration
-@Import({MysqlDbConfig.class})
 @EnableWebMvc
 @ComponentScan(basePackages = "com.spring.mvc")
 public class AppConfig {

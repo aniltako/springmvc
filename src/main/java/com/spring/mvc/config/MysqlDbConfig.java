@@ -15,9 +15,11 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories(basePackages="com.spring.mvc.model",entityManagerFactoryRef="localContainerEntityManagerFactoryBean")
+@EnableTransactionManagement
+@EnableJpaRepositories(basePackages="com.spring.mvc.dao",entityManagerFactoryRef="localContainerEntityManagerFactoryBean")
 public class MysqlDbConfig {
 
 	@Value("${jdbc.driverClassName}")     private String driverClassName;
