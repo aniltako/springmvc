@@ -1,27 +1,27 @@
 # springmvc
 
-Clone this project to your local workspace.
-cd \path\to\project
-gradle eclipse
-Import this project to eclipse.
+Clone this project to your local workspace.<br>
+cd \path\to\project<br>
+gradle eclipse<br>
+Import this project to eclipse.<br>
 
 # Mysql Configuration
-install mysql
-create user
-create database 
-grand previlleges to the user
+install mysql<br>
+create user<br>
+create database<br> 
+grand previlleges to the user<br>
 
 # config.properties
 
-################### JDBC Configuration ##########################
-jdbc.driverClassName=com.mysql.jdbc.Driver
-jdbc.url=jdbc:mysql://localhost:3306/springmvc
-jdbc.username=root
-jdbc.password=root
+################### JDBC Configuration ##########################<br>
+jdbc.driverClassName=com.mysql.jdbc.Driver<br>
+jdbc.url=jdbc:mysql://localhost:3306/springmvc<br>
+jdbc.username=root<br>
+jdbc.password=root<br>
 
-################### Hibernate Configuration ##########################
-hibernate.dialect=org.hibernate.dialect.HSQLDialect
-hibernate.show_sql=true
-hibernate.hbm2ddl.auto=update
-hibernate.generate_statistics=true
+################### Hibernate Configuration ##########################<br>
+hibernate.dialect=org.hibernate.dialect.HSQLDialect<br>
+hibernate.show_sql=true<br>
+hibernate.hbm2ddl.auto=update<br>
+hibernate.generate_statistics=true<br>
 
