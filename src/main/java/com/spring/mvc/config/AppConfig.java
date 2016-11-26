@@ -6,11 +6,7 @@ import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
@@ -20,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 //@EnableJpaRepositories(basePackages="com.spring.mvc.dao")
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.spring.mvc")
+@ComponentScan(basePackages = {"com.spring.mvc"})
 public class AppConfig {
 	
 	private static final Logger logger = LoggerFactory.getLogger(AppConfig.class);
