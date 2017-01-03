@@ -4,6 +4,9 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import test.Calculation;
+
  
 @RestController
 public class HelloController {
@@ -18,5 +21,12 @@ public class HelloController {
     public String sayHelloAgain() {
         return "Authenticated";
     }
- 
+    
+//    @RequestMapping(value = "/add", method = RequestMethod.POST)
+//    public static int add() {
+////    	CalculationImpl cal = new CalculationImpl();
+////    	return cal.add(3, 3);
+//    	
+//    }
+    
 }

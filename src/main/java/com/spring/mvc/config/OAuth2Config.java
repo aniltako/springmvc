@@ -1,6 +1,7 @@
 package com.spring.mvc.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -12,7 +13,9 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.E
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.error.OAuth2AccessDeniedHandler;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
@@ -21,7 +24,7 @@ import com.spring.mvc.service.CustomUserDetailsService;
 
 @Configuration
 public class OAuth2Config{
-	
+	private static String REALM="MY_OAUTH_REALM";
 	private static final String RESOURCE_ID = "restservice";
 	
 	@Configuration
@@ -33,7 +36,7 @@ public class OAuth2Config{
 		public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 			//@formatter:off
 			resources
-				.resourceId(RESOURCE_ID);
+				.resourceId(RESOURCE_ID).stateless(false);
 			//@formatter:on
 		}
 		
@@ -41,10 +44,17 @@ public class OAuth2Config{
 		public void configure(HttpSecurity http) throws Exception {
 			//@formatter:off
 			
-			http
-			.authorizeRequests()
-				.antMatchers("/users").hasRole("ADMIN")
-				.antMatchers("/greeting").authenticated();
+			  http.
+		        anonymous().disable()
+		        .requestMatchers().antMatchers("/users/**")
+		        .and().authorizeRequests()
+		        .antMatchers("/users/**").access("hasRole('ADMIN')")
+		        .and().exceptionHandling().accessDeniedHandler(new OAuth2AccessDeniedHandler());
+			
+//			http
+//			.authorizeRequests()
+//				.antMatchers("/users").hasRole("ADMIN")
+//				.antMatchers("/greeting").authenticated();
 			
 //			 // only secure channel, https, is allowed
 //	           http.requiresChannel().anyRequest().requiresSecure();
@@ -75,6 +85,7 @@ public class OAuth2Config{
 		private TokenStore tokenStore;
 		
 		@Autowired
+		@Qualifier("authenticationManagerBean")
 		private AuthenticationManager authenticationManager;
 		
 		@Autowired
@@ -85,8 +96,8 @@ public class OAuth2Config{
 			//@formatter:off
 			endpoints
 				.tokenStore(this.tokenStore)
-				.authenticationManager(this.authenticationManager)
-				.userDetailsService(userDetailsService);
+				.userDetailsService(userDetailsService)
+				.authenticationManager(this.authenticationManager);
 			//@formatter:on
 		}
 		
@@ -102,6 +113,11 @@ public class OAuth2Config{
 						.resourceIds(RESOURCE_ID)
 						.secret("123");
 			//@formatter:on
+		}
+		
+		@Override
+		public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+			security.realm(REALM+"/client");
 		}
 		
 		@Bean
