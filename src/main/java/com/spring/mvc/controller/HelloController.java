@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloController {
  
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/anil", method = RequestMethod.GET)
     public String sayHello(ModelMap model) {
         model.addAttribute("greeting", "Hello World from Spring 4 MVC");
         return "welcome";
     }
  
-    @RequestMapping(value = "/helloagain", method = RequestMethod.GET)
+    @RequestMapping(value = "/tako", method = RequestMethod.GET)
     public String sayHelloAgain() {
-        return "welcome";
+        return "Authenticated";
     }
  
 }
