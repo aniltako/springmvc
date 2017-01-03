@@ -19,6 +19,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private CustomUserDetailsService userDetailsService;
 	
+	@Autowired
+    public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+        .withUser("bill").password("abc123").roles("ADMIN").and()
+        .withUser("bob").password("abc123").roles("USER");
+    }
+	
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
